@@ -1,0 +1,20 @@
+php artisan migrate
+Este comando ejecuta las migraciones pendientes. Las migraciones son scripts de PHP que contienen definiciones para crear, modificar o eliminar tablas de la base de datos. Cuando ejecutas php artisan migrate, Laravel busca en el directorio database/migrations cualquier archivo de migración que aún no se haya ejecutado y aplica los cambios definidos en estos archivos a la base de datos configurada en tu archivo .env.
+
+php artisan migrate:status
+Este comando muestra el estado de cada migración. Lista todas las migraciones junto con su estado, indicando si cada migración ha sido ejecutada (migrada) o no.
+
+php artisan migrate:rollback
+Este comando revierte la última "batch" de migraciones que fueron aplicadas a la base de datos. Esencialmente, este comando deshace los cambios hechos por las últimas migraciones ejecutadas, lo que puede ser útil durante el desarrollo si necesitas volver a un estado anterior de la estructura de la base de datos.
+
+php artisan migrate:reset
+php artisan migrate:reset revierte todas las migraciones aplicadas. Este comando es más exhaustivo que rollback, ya que no se limita a la última serie de migraciones, sino que deshace todas las migraciones, devolviendo la base de datos a su estado original antes de que se aplicaran cualquier migraciones.
+
+php artisan migrate:refresh
+Este comando es una combinación de reset y migrate. Primero revierte todas las migraciones y luego las vuelve a aplicar. Es útil para cuando necesitas reconstruir completamente la base de datos.
+
+php artisan make:migration
+El comando php artisan make:migration se utiliza para crear un nuevo archivo de migración. Al ejecutarlo, debes proporcionar un nombre para la migración que describe lo que hará, por ejemplo:
+
+php artisan migrate --seed
+Finalmente, php artisan migrate --seed combina la ejecución de migraciones y el llenado de la base de datos con datos de prueba (seed data). Después de aplicar las migraciones, este comando también ejecutará cualquier "seeder" disponible que haya sido definido en el directorio database/seeders. Los seeders son clases en Laravel que permiten poblar tablas de la base de datos con datos de prueba.

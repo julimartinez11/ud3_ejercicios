@@ -1,0 +1,5 @@
+El método create de la clase Schema se utiliza para definir la estructura de una tabla nueva en la base de datos.
+
+$table->string('email')->primary(); define un campo email como una cadena y lo establece como la clave primaria de la tabla.
+
+Hay 3 tablas definidas que son users, cache y jobs.

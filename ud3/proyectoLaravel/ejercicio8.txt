@@ -1,0 +1,38 @@
+Paso 1: Crear una Nueva Migración para Modificar la Tabla
+Para añadir un nuevo campo a una tabla existente mediante una migración en Laravel, primero necesitamos crear una nueva migración que especificará este cambio:
+Desde la terminal y dentro del directorio de tu proyecto Laravel, ejecuta el siguiente comando para crear una nueva migración que modificará la tabla alumnos:
+php artisan make:migration add_apellido_to_alumnos_table --table=alumnos
+Este comando genera un nuevo archivo de migración en el directorio database/migrations. El nombre del archivo incluirá una marca de tiempo seguida de _add_apellido_to_alumnos_table.php.
+
+Paso 2: Definir el Cambio en la Migración
+Abre el archivo de migración recién creado en tu editor de texto. Dentro del archivo, encontrarás dos métodos: up() y down(). Modifica estos métodos para añadir y, opcionalmente, eliminar el campo apellido:
+
+En el método up(), añade el campo apellido:
+
+public function up()
+{
+    Schema::table('alumnos', function (Blueprint $table) {
+        $table->string('apellido')->after('nombre'); // Añade el apellido después del campo nombre
+    });
+}
+
+En el método down(), asegúrate de que puedes revertir este cambio si es necesario:
+
+public function down()
+{
+    Schema::table('alumnos', function (Blueprint $table) {
+        $table->dropColumn('apellido'); // Elimina el campo apellido
+    });
+}
+
+Paso 3: Ejecutar la Migración
+Regresa a tu terminal y, asegurándote de estar aún en el directorio del proyecto Laravel, ejecuta el siguiente comando para aplicar la migración y añadir el campo apellido a la tabla alumnos:
+php artisan migrate
+
+Paso 4: Verificar los Cambios
+Para verificar que el campo apellido se haya añadido correctamente a la tabla alumnos, puedes usar MariaDB para inspeccionar la estructura de la tabla:
+docker exec -it mariadb-server mariadb -u root -p
+Luego, dentro de MariaDB:
+USE test2;  
+DESCRIBE alumnos;  
+Deberías ver el nuevo campo apellido listado en la estructura de la tabla.
